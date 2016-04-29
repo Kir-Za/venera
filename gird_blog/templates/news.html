@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- container -->
+<div class="container">
+	<div class="row">		
+		<!-- Sidebar -->
+		<aside class="col-md-4 sidebar sidebar-left">
+			<div class="row widget">
+				<div class="col-xs-12">
+					<p></p>
+					<h4>Ближайшие мероприятия</h4>
+                    {% if events %}
+                        {% for event in events %}
+                        <blockquote>
+                            {{ event.time|date:"d E Y H:i" }}
+                            {{ event.summary|safe }}
+                        </blockquote>
+                        {% endfor %}
+                        {% else %}
+                        <blockquote>
+                        <p>Мероприятий на ближайшее время не запланировано.</p>
+                        </blockquote>
+                    {% endif %}
+				</div>
+			</div>
+		</aside>
+		<!-- /Sidebar -->
+
+		<article class="col-md-8 maincontent">
+			<header class="page-header">
+				<h1 class="page-title">Новости</h1>
+			</header>
+            {% for news in newslenta %}
+			<h2 class="nameart"><a href="{{ news.source }}">{{ news.title }}</a></h2>
+			<h5>{{ news.time }}</h5>
+			<p class="article">{{ news.abstract|safe }}</p>
+            {% endfor %}
+        </article>
+	</div>
+</div>	<!-- /container -->
+<nav>
+    <ul class="pager">
+        {% if newslenta.has_previous %}
+        <li><a href="?page={{ newslenta.previous_page_number }}"> < </a></li>
+        {% endif %}
+        {% if newslenta.has_next %}
+        <li><a href="?page={{ newslenta.next_page_number }}"> > </a></li>
+        {% endif %}
+    </ul>
+ </nav>
+{% endblock %}

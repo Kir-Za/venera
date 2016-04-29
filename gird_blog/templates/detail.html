@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div id="f">
+		<div class="container">
+			<div class="row">
+				<h3>{{ article.title}}</h3>
+				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+				<!-- INTRO INFORMATIO-->
+				<div class="justify col-lg-10 col-lg-offset-1" >
+				<p>{{ article.content|safe }}</p>
+				<h5 class="tagart">
+				{% for tag in article.keywords_set.all %}
+				<a href="/articles/sort/{{ tag.pk }}/">
+					{{ tag }};
+				</a>
+				{% endfor %}
+				</h5>
+				</div>								
+			</div>
+		</div>
+	</div>
+{% endblock %}

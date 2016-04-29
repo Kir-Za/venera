@@ -1,0 +1,22 @@
+{%  extends 'base.html' %}
+{%  load staticfiles %}
+{%  block content %}
+    <div class="container">
+    <div class="row">
+        <p></p>
+    <img class ="info_img" src="{% static 'image/logo_big.png'%}">
+    </div>
+        </div>
+	<div id="f">
+		<div class="container">
+			<div class="row">
+				<h3>{{ contact_info.lable }}</h3>
+				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+
+				<div class="col-lg-6 col-lg-offset-3">
+					<p>{{ contact_info.title_text|safe }}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

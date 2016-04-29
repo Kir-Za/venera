@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- container -->
+<div class="container" xmlns="">
+	<div class="row">	
+		
+		<!-- Sidebar -->
+		<aside class="col-md-2 sidebar sidebar-left hidden-xs hidden-sm">
+			<div class="row widget">
+				<div class="col-xs-12">
+					<p></p>
+					<blockquote>
+					<p>
+					{% for tag in tags %}
+                        <a href="/articles/sort/{{ tag.pk }}/">{{ tag.tag_word }}<br></a>
+					{% endfor %}
+					</p>
+					</blockquote>
+				</div>
+			</div>
+		</aside>
+		<!-- /Sidebar -->
+
+		<!-- Article main content -->
+		<article class="col-md-10 maincontent">
+			<header class="page-header">
+				<h1 class="page-title">Статьи</h1>
+			</header>
+            {% for article in articleslenta %}
+            <div class="container"> 
+			<h2 class="nameart"><a href="/articles/detail/{{ article.pk }}/">{{ article.title }}</a></h2>
+			<h5>{{ article.time }}</h5>
+			<p class="article">{{ article.abstract|safe }}</p>
+			<h5 class="tagart">
+			{% for tag in article.keywords_set.all %}
+			<a href="/articles/sort/{{ tag.pk }}/">
+				{{ tag }};
+			</a>
+			{% endfor %}
+			</h5>
+			</div>
+            {% endfor %}
+        </article>		
+		<!-- /Article -->
+	</div>
+</div><!-- /container -->
+<nav>
+    <ul class="pager">
+        {% if articleslenta.has_previous %}
+        <li><a href="?page={{ articleslenta.previous_page_number }}"> < </a></li>
+        {% endif %}
+        {% if articleslenta.has_next %}
+        <li><a href="?page={{ articleslenta.next_page_number }}"> > </a></li>
+        {% endif %}
+    </ul>
+ </nav>
+{% endblock %}
