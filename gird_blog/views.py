@@ -11,7 +11,7 @@ def home(request):
 
 def newslenta(request):
     events = Event.objects.all().filter(time__gte=timezone.now())
-    news_list = Newslenta.objects.all()
+    news_list = Newslenta.objects.all().filter(time__lte=timezone.now())
     paginator = Paginator(news_list, 20)
     page = request.GET.get('page')
     try:
