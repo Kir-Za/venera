@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,  get_object_or_404
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from gird_blog.models import SiteInfo, Newslenta, Event, Article, Keywords
@@ -41,12 +41,12 @@ def articles(request, tag_id=None):
     return render(request, 'articles.html', {'articleslenta': articleslenta, 'tags': tags})
 
 def detail(request, article_id):
-    article = Article.objects.get(pk=article_id)
+    article = get_object_or_404(Article, pk=article_id)
     return render(request, 'detail.html', {'article': article})
 
 def projects(request):
     return render(request, 'projects.html', {})
 
 def contacts(request):
-    contact_info = SiteInfo.objects.get(lable="Контакты")
+    contact_info = get_object_or_404(SiteInfo, lable="Контакты")
     return render(request, 'contacts.html', {'contact_info': contact_info})
